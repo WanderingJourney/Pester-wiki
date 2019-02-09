@@ -48,7 +48,7 @@ $pathTwo = 'TestDrive:\somefile.txt'
 
 To get the full path, you can use this snippet:
 
-```
+```posh
 function GetFullPath {
     Param(
         [string] $Path
