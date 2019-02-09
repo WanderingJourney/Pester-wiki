@@ -46,6 +46,17 @@ $pathOne = Join-Path $TestDrive 'somefile.txt'
 $pathTwo = 'TestDrive:\somefile.txt'
 ```
 
+To get the full path, you can use this snippet:
+
+```
+function GetFullPath {
+    Param(
+        [string] $Path
+    )
+    return $Path.Replace('TestDrive:', (Get-Item $TestDrive).FullName)
+}
+```
+
 Working with .NET Objects
 ---------
 When working directly with .NET objects, it's not possible to use the convenient `TestDrive:\` PSDrive. Instead you need to use the `$TestDrive` variable which holds the actual path in a format that .NET understands. For example instead of using `TestDrive:\somefile.txt` use `$TestDrive\somefile.txt` instead.
