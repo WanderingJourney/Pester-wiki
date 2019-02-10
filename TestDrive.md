@@ -48,12 +48,12 @@ $pathTwo = 'TestDrive:\somefile.txt'
 
 To get the full path, you can use this snippet:
 
-```posh
+```powershell
 function GetFullPath {
     Param(
         [string] $Path
     )
-    return $Path.Replace('TestDrive:', (Get-Item $TestDrive).FullName)
+    return $Path.Replace('TestDrive:', (Get-PSDrive TestDrive).Root)
 }
 ```
 
