@@ -254,6 +254,23 @@ $null | Should -Not -BeNullOrEmpty # Test will fail
 ""    | Should -BeNullOrEmpty # Test will pass
 ```
 
+### Because
+Adds message to test failure message.
+
+```powershell
+$actual = "Actual value"
+$actual | Should -Be "actual value" -Because 'Test must pass'
+$actual | Should -Be "not actual value" -Because 'Test must fail'
+# OUTPUT
+# Expected strings to be the same, because Test must fail, but they were different.
+# Expected length: 16
+# Actual length:   12
+# Strings differ at index 0.
+# Expected: 'not actual value'
+# But was:  'Actual value'
+# -----------^
+```
+
 USING SHOULD IN A TEST
 ----------------------
 
