@@ -271,6 +271,18 @@ $actual | Should -Be "not actual value" -Because 'Test must fail'
 # -----------^
 ```
 
+### HaveParameter
+An assertion operator `-HaveParameter` allows you to check function parameters, and their properties like this:
+
+```
+Get-Command "Invoke-WebRequest" | Should -HaveParameter Uri -Mandatory
+function f ([String] $Value = 8) { }
+Get-Command f | Should -HaveParameter Value -Type String
+Get-Command f | Should -Not -HaveParameter Name
+Get-Command f | Should -HaveParameter Value -DefaultValue 8
+Get-Command f | Should -HaveParameter Value -Not -Mandatory
+```
+
 USING SHOULD IN A TEST
 ----------------------
 
