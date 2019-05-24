@@ -14,7 +14,7 @@ Enables experimental features of Pester to be enabled.
 
 SHOWSCOPEHINTS
 ----------
-EXPERMINETAL: Enables debugging output for debugging tranisition among scopes. (Experimental flag needs to be used to enable this.)
+EXPERIMENTAL: Enables debugging output for debugging transition among scopes. (Experimental flag needs to be used to enable this.)
 
 Example 1
 ---------
