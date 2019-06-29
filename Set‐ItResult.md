@@ -65,6 +65,6 @@ Describing Set-ItResult Examples
 Tests Passed: 0, Failed: 0, Skipped: 1, Pending: 1, Inconclusive 1
 ```
 
-## NOTES
+## Notes
 
 To ensure a consistent result the `Set-ItResult` should be invoked before any other command inside the `It` block that may return a result. In particular commands that return an exception (such as a `Should` that returns a failed result) will result in the test being marked as failed, if `Set-ItResult` is not used first.
