@@ -4,9 +4,7 @@ Validates the results of a test inside of a `Describe` or `Context` block.
 
 The `It` command is intended to be used inside of a `Describe` or `Context` Block. If you are familiar with the AAA pattern (Arrange-Act-Assert), the body of the `It` block is the appropriate location for an assert. The convention is to assert a single expectation for each `It` block. The code inside of the `It` block should throw a terminating error if the expectation of the test is not met and thus cause the test to fail. The name of the `It` block should expressively state the expectation of the test.
 
-In addition to using your own logic to test expectations and 
-throw exceptions, you may also use Pester's `Should` command
-to perform assertions in plain language.
+In addition to using your own logic to test expectations and throw exceptions, you may also use Pester's `Should` commandto perform assertions in plain language.
 
 Possible results of a test are:
 
@@ -36,7 +34,7 @@ Use this parameter to explicitly mark test to be skipped. This is preferable to 
 
 #### `Pending`
 
-Use this parameter to explicitly mark unfinished tests as pending. This might be useful to distinguish a test that is work-in-progress from tests that fail as a result of a changes being made to the code base. 
+Use this parameter to explicitly mark unfinished tests as pending. This might be useful to distinguish a test that is work-in-progress from tests that fail as a result of a changes being made to the code base.
 
 A test that is empty, contains only comments, or the combination of both will become Pending by default. Use the [Strict](https://github.com/pester/Pester/wiki/Invoke-Pester#strict) parameter of [[Invoke-Pester]] to force all pending tests to fail.
 
