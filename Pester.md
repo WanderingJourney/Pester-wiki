@@ -8,10 +8,10 @@ Pester also contains a powerful set of Mocking Functions that allow tests to mim
 
 ## Creating a Pester Test
 
-To start using Pester, you may use the [[New-Fixture]] function to scaffold both a new implementation function and a test function. It is not necessary to use New-Fixture, but it's there if you want it. New-Fixture assumes that you will be testing the contents of a ```.ps1``` file (not a ```.psm1``` file, or Script Module), that the test script should be in the same directory as the script under test, and that
+To start using Pester, you may use the [[New‐Fixture]] function to scaffold both a new implementation function and a test function. It is not necessary to use New-Fixture, but it's there if you want it. New-Fixture assumes that you will be testing the contents of a ```.ps1``` file (not a ```.psm1``` file, or Script Module), that the test script should be in the same directory as the script under test, and that
 the name of the test script should be ```<Name of Script Under Test>.Tests.ps1```.
 
-If you wish to create script files manually with different conventions, that's fine, but all Pester test scripts _must_ end with ```.Tests.ps1``` in order for [[Invoke-Pester]] to run them.
+If you wish to create script files manually with different conventions, that's fine, but all Pester test scripts _must_ end with ```.Tests.ps1``` in order for [[Invoke‐Pester]] to run them.
 
 ```powershell
 New-Fixture deploy Clean
@@ -38,13 +38,13 @@ Describe "Clean" {
 }
 ```
 
-Now you have a skeleton of a Clean function with a failing test. Pester considers all files with names ending in ```.Tests.ps1``` to be a test file (see [[Invoke-Pester]]) and by default it will look for these files in the current directory and run all Describe blocks inside the file (see [[Describe]]).
+Now you have a skeleton of a Clean function with a failing test. Pester considers all files with names ending in ```.Tests.ps1``` to be a test file (see [[Invoke‐Pester]]) and by default it will look for these files in the current directory and run all Describe blocks inside the file (see [[Describe]]).
 
 The Describe block can contain several behavior validations expressed in It blocks (see [[It]]). Each It block should test one thing and throw an exception if the test fails. Pester will consider any It block that throws an exception to be a failed test. Pester provides a command called Should that can perform various comparisons between the values emitted or altered by a command and an expected value (see [[Should]]).
 
 ## Running a Pester test
 
-Once you have some logic that you are ready to test, use the Invoke-Pester command to run the tests (see [[Invoke-Pester]]). You run all the test files in an entire tree of directories or zero in on just one test (`Describe` block) using ```-TestName``` parameter.
+Once you have some logic that you are ready to test, use the Invoke-Pester command to run the tests (see [[Invoke‐Pester]]). You run all the test files in an entire tree of directories or zero in on just one test (`Describe` block) using ```-TestName``` parameter.
 
 As of Pester version 3.0, you can also directly execute any ```.Tests.ps1``` script file; however, by doing so, you will only see test output at the console.  You give up any of the benefits of using Invoke-Pester, such as the ability to produce NUnit XML files or output objects, Code Coverage analysis, an exit code from PowerShell.exe, filtering of tests to execute, and a status summary of tests executed / failed when the run is complete.
 
@@ -52,9 +52,9 @@ As of Pester version 3.0, you can also directly execute any ```.Tests.ps1``` scr
 
 Pester integrates well with almost any build automation solution. You could create a MSBuild target that calls Pester's convenience Batch file:
 
-```powershell
+```xml
 <Target Name="Tests">
-<Exec Command="cmd /c $(baseDir)pester\bin\pester.bat" />
+    <Exec Command="cmd /c $(baseDir)pester\bin\pester.bat" />
 </Target>
 ```
 
