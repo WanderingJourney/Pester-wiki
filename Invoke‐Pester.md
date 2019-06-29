@@ -71,7 +71,7 @@ The format of output. Two formats of output are supported: NUnitXML and LegacyNU
 
 :warning: **The parameter `OutputXml` is deprecated, please use `OutputFile` and `OutputFormat` instead.**
 
-The path where Invoke-Pester will save a NUnit formatted test results log file. 
+The path where Invoke-Pester will save a NUnit formatted test results log file.
 If this path is not provided, no log will be generated.
 
 #### `Show`
