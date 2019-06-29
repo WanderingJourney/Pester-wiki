@@ -2,8 +2,7 @@
 
 `Should` is a command that provides assertion convenience methods for comparing objects and throwing test failures when test expectations fail. `Should` is used inside `It` blocks of a Pester test script.
 
-NEGATIVE ASSERTIONS
---------------
+## Negative Assertions
 
 When reviewing the operators listed below, keep in mind that all of them can be negated by putting the word "Not" between "Should" and the operator. For example:
 
@@ -12,9 +11,10 @@ $true | Should Be $true
 $true | Should Not Be $false
 ```
 
-SHOULD OPERATORS
---------------
+## Should Operators
+
 ### Be
+
 Compares one object with another for equality and throws if the two objects are not the same. This comparison is not case sensitive.
 
 ```powershell
@@ -24,6 +24,7 @@ $actual | Should Be "not actual value"  # Test will fail
 ```
 
 ### BeExactly
+
 Compares one object with another for equality and throws if the two objects are not the same. This comparison is case sensitive.
 
 ```powershell
@@ -33,6 +34,7 @@ $actual | Should BeExactly "actual value" # Test will fail
 ```
 
 ### BeGreaterThan
+
 Asserts that a number is greater than an expected value. Uses PowerShell's -gt operator to compare the two values.
 
 ```powershell
@@ -40,6 +42,7 @@ $Error.Count | Should BeGreaterThan 0
 ```
 
 ### BeLessThan
+
 Asserts that a number is less than an expected value. Uses PowerShell's -lt operator to compare the two values.
 
 ```powershell
@@ -47,6 +50,7 @@ $Error.Count | Should BeLessThan 1
 ```
 
 ### BeLike
+
 Asserts that the actual value matches a wildcard pattern using PowerShell's -like operator. This comparison is not case-sensitive.
 
 ```powershell
@@ -56,6 +60,7 @@ $actual | Should BeLike "not actual *" # Test will fail
 ```
 
 ### BeLikeExactly
+
 Asserts that the actual value matches a wildcard pattern using PowerShell's -like operator. This comparison is case-sensitive.
 
 ```powershell
@@ -65,6 +70,7 @@ $actual | Should BeLikeExactly "actual *" # Test will fail
 ```
 
 ### BeOfType
+
 Asserts that the actual value should be an object of a specified type (or a subclass of the specified type) using PowerShell's -is operator:
 
 ```powershell
@@ -76,6 +82,7 @@ $actual | Should BeOfType System.IO.FileInfo        # Test will fail; FileInfo i
 ```
 
 ### Exist
+
 Does not perform any comparison but checks if the object calling Exist is present in a PS Provider. The object must have valid path syntax. It essentially must pass a Test-Path call.
 
 ```powershell
@@ -86,8 +93,8 @@ $actual | Should Exist # Test will fail
 
 To test path containing `[ ]` wildcards, escape each bracket with two back-ticks as such ````"TestDrive:\``[test``].txt"```` or use `Test-Path -LiteralPath $something | Should Be $true`.
 
-
 ### Contain
+
 Checks to see if a file contains the specified text. This search is not case sensitive and uses regular expressions.
 
 ```powershell
@@ -115,6 +122,7 @@ c:\file.txt |  Should Contain something # Will throw an error
 ```
 
 ### ContainExactly
+
 Checks to see if a file contains the specified text. This search is case sensitive and uses regular expressions to match the text.
 
 ```powershell
@@ -124,19 +132,23 @@ Set-Content -Path TestDrive:\file.txt -Value 'I am a file.'
 ```
 
 ### Match
+
 Uses a regular expression to compare two objects. This comparison is not case sensitive.
 
 ```powershell
 "I am a value" | Should Match "I Am" # Test will pass
 "I am a value" | Should Match "I am a bad person" # Test will fail
 ```
+
 **Tip:** Use ```[regex]::Escape("pattern")``` to match the exact text.
+
 ```powershell
 "Greg" | Should Match ".reg" # Test will pass
 "Greg" | Should Match ([regex]::Escape(".reg")) # Test will fail
 ```
 
 ### MatchExactly
+
 Uses a regular expression to compare two objects. This comparison is case sensitive.
 
 ```powershell
@@ -145,6 +157,7 @@ Uses a regular expression to compare two objects. This comparison is case sensit
 ```
 
 ### Throw
+
 Checks if an exception was thrown in the input ScriptBlock. Takes an optional argument to indicate the expected exception message.
 
 ```powershell
@@ -157,16 +170,19 @@ Checks if an exception was thrown in the input ScriptBlock. Takes an optional ar
 ```
 
 Note: The exception message match is a substring match, so the following assertion will pass:
+
 ```powershell
 {throw "foo bar baz"} | Should Throw "bar" # Test will pass
 ```
 
 **Warning:** The input object must be a ScriptBlock, otherwise it is processed outside of the assertion.
+
 ```powershell
 Get-Process -Name "process" -ErrorAction Stop  | Should Throw # Should pass but fails the test
 ```
 
 ### BeNullOrEmpty
+
 Checks values for null or empty (strings). The static [String]::IsNullOrEmpty() method is used to do the comparison.
 
 ```powershell
@@ -176,25 +192,24 @@ $null | Should Not BeNullOrEmpty # Test will fail
 ""    | Should BeNullOrEmpty # Test will pass
 ```
 
-USING SHOULD IN A TEST
-----------------------
+## Using `Should` in a Test
 
 ```powershell
 function Add-Numbers($a, $b) {
-	return $a + $b
+    return $a + $b
 }
 
 Describe "Add-Numbers" {
 
-	It "adds positive numbers" {
-	    $sum = Add-Numbers 2 3
-	    $sum | should be 3
-	}
+    It "adds positive numbers" {
+        $sum = Add-Numbers 2 3
+        $sum | should be 3
+    }
 
-    It "ensures that that 2 + 2 does not equal 5" {
-	    $sum = Add-Numbers 2 2
-	    $sum | should not be 5
-	}
+    It "ensures that 2 + 2 does not equal 5" {
+        $sum = Add-Numbers 2 2
+        $sum | should not be 5
+    }
 }
 ```
 

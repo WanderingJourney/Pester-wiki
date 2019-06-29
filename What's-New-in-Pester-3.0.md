@@ -1,5 +1,4 @@
-What's New in Pester 3.0?
--------
+## New Features
 
 ### Scope Isolation
 
@@ -17,11 +16,11 @@ Note:  Parts of this feature constitute a breaking change from Pester 2.1.0.  In
 
 In Pester v2.1.0, any time you exited a `Context` or `Describe` block, the entire call history to mocked commands was deleted (even for mocks that were defined in a `Describe` block and were still in scope.)  In Pester 3.0, this call history is maintained all the way through to the end of the `Describe` block, and you can tweak the behavior of `Assert-MockCalled` so that it only looks at calls from a specific Pester scope by using the `-Scope` parameter.  For example:
 
-```posh
+```powershell
 Describe 'Describe Scope' {
     Mock Write-Host { }
     Write-Host 'Call from Describe'
-        
+
     Context 'Context scope' {
         Write-Host 'Call from Context'
         It 'Fails because no calls to the mock came from this It block' {
@@ -53,13 +52,14 @@ Pester's testing language now has two new commands, `BeforeEach` and `AfterEach`
 
 The `-EnableLegacyExpectations` switch of `Invoke-Pester` has been removed, marking the end of support for the old `$result.Should.Be($expected)` syntax of performing assertions.  All test scripts must now use the newer pipeline syntax of `$result | Should Be $expected`.
 
-### Full support for running Pester tests with StrictMode enabled.
+### Full support for running Pester tests with StrictMode enabled
 
 Pester's own internal test suite now enables StrictMode, to make sure that the code all works under these conditions.  There should no longer be any bugs introduced related to this setting.
 
 ### Numerous other small improvements and fixes
 
 These shouldn't produce breaking changes, but a number of other little fixes were made during the v3.0 development process:
+
 - Terminating errors in `Context` or `Describe` blocks now generate a failed "test" in the output (including in the NUnit XML, etc.).
 - Any stray pipeline output in a `Context` or `Describe` block is now discarded (as it already was for `It` blocks.)
 - If you try to call Pester commands other than `Invoke-Pester` or `New-Fixture` outside of a `Describe` block, you'll get a single, meaningful error message instead of a jumble of garbage.

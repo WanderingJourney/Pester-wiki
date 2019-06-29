@@ -2,15 +2,13 @@ This command can be used inside an `It` block to explicitly set the test result 
 
 - :warning: **As of Pester 4.5.0 the `Set-TestInconclusive` cmdlet is deprecated. You should now use the more flexible `Set-ItResult` cmdlet instead that is described [here](Set‐ItResult)**.
 
-## DESCRIPTION
+## Description
 
-If `Set-TestInconclusive` is used inside an `It` block, the test will return an Inconclusive result. 
-This is not a passed nor failed result, but something in between - Inconclusive. 
-It indicates that the results of the test could not be verified.
+If `Set-TestInconclusive` is used inside an `It` block, the test will return an Inconclusive result. This is not a passed nor failed result, but something in between - Inconclusive. It indicates that the results of the test could not be verified.
 
 You should invoke `Set-TestInconclusive` before any other test inside the `It` block to ensure it returns and inconclusive result. See the below examples for what result occurs if you do not do this:
 
-## EXAMPLE
+## Example
 
 ```powershell
 
@@ -37,7 +35,7 @@ Describe "Function1" {
 
 Note, in the above example the function Function1.ps1 is empty (initialized by `New-Fixture`).
 
-## RESULTS
+## Results
 
 Returned results are:
 
@@ -66,7 +64,7 @@ Tests Passed: 0, Failed: 1, Skipped: 0, Pending: 0, Inconclusive: 2
 PS >
 ```
 
-## EXPLANATION
+## Explanation
 
 `Set-TestInconclusive` should be the first line of a test, if you want to use it. It blocks are terminated by exceptions, which can be thrown by any command (including `Should` and `Set-TestInconclusive`.) Whichever one throws the error first wins.
 
