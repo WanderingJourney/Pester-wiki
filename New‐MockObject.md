@@ -1,9 +1,10 @@
-New-MockObject is a Pester function (introduced in Pester 3.4.4) that allows you to create "fake" objects of almost any type to run in Pester mocks. These "fake objects" allow your mocks to return the same type as the function it was mocking to pass the result to entities that are strongly typed.
+`New-MockObject` is a Pester function (introduced in Pester 3.4.4) that allows you to create "fake" objects of almost any type to run in Pester mocks. These "fake objects" allow your mocks to return the same type as the function it was mocking to pass the result to entities that are strongly typed.
 
 To explain the problem that `New-MockObject` solves, we'll describe a scenario that cannot be solved without it. I'm working with a script that contains two functions.
 
-Do-Thing.ps1
-================
+### Do-Thing.ps1
+
+```powershell
     function Set-Thing {
         param (
             [Thing.Type]$Thing ## $Thing is STRONGLY typed. This param MUST be Thing.Type
@@ -22,32 +23,34 @@ Do-Thing.ps1
 
     $thing = Get-Thing -ThingLabel 'whatever'
     Set-Thing -Thing $thing ## Requires $thing to be of type Thing.Type
-======================
+```
 
 This script gets and sets a thing based on a `ThingLabel` string parameter. It uses the `Get-Thing` function and the parameter value to get a particular thing. Then, it uses its `Set-Thing` function to change the thing. Most importantly, Get-Thing returns a [Thing.Type] object that Set-Thing requires as input.
 
 A sample Pester test for the script might look something like this. To isolate the Set-Thing function, we mock the output of the Get-Thing function. Then, we assert that Set-Thing is called once.
 
-    describe 'Set the thing' {
-    
-        mock 'Get-Thing' {
+```powershell
+    Describe 'Set the thing' {
+
+        Mock 'Get-Thing' {
             [pscustomobject]@{ Property = 'Value' }
         }
 
-        mock 'Set-Thing'
+        Mock 'Set-Thing'
 
-        .\Do-Thing.ps1    
+        .\Do-Thing.ps1
 
-        it 'sets the right thing' {
+        It 'sets the right thing' {
             $assertMockParams = @{
                 'CommandName' = 'Set-Thing'
                 'Times' = 1
                 'Exactly' = $true
                 'ParameterFilter' = {$Thing -eq '????' }
             }
-            Assert-MockCalled @assertMockParams 
+            Assert-MockCalled @assertMockParams
         }
     }
+```
 
 The assertion (Assert-MockCalled on Set-Thing) fails because the `Thing` parameter of `Set-Thing` must be of type `Thing.Type` and `Get-Thing` must return that type. But, instead, the mock of `Get-Thing` returns a custom object (`[System.Management.Automation.PSCustomObject]`).
 
@@ -59,8 +62,10 @@ Even when the object you initially set out to mock and all of the arguments have
 
 The only part that would need to be changed is the mock to `Get-Thing`. Now, depending on if the required .NET assembly is available; you can simply mock `Get-Thing` to output whatever type of object you want regardless of the circumstances.
 
+```powershell
     mock 'Get-Thing' {
         New-MockObject -Type Thing.Type
     }
+```
 
 At this point, the test would run as you would expect!

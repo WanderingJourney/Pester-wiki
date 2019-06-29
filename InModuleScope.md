@@ -18,7 +18,7 @@ Export-ModuleMember -Function PublicFunction
 
 Normally, you cannot call the `PrivateFunction` command after importing the module; only `PublicFunction` would be exposed to the rest of the PowerShell session.  For example, this test would fail with an error of "The term 'PrivateFunction' is not recognized as the name of a cmdlet, function, script file, or operable program.":
 
-```posh
+```powershell
 Import-Module MyModule
 
 Describe 'Testing MyModule' {
@@ -30,7 +30,7 @@ Describe 'Testing MyModule' {
 
 By using `InModuleScope`, you can execute test code inside the module, giving you access to its internal functions, variables, and aliases.  For example:
 
-```posh
+```powershell
 Import-Module MyModule
 
 InModuleScope MyModule {

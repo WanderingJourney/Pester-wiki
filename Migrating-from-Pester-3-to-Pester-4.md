@@ -5,7 +5,7 @@ Migration from Pester 3 to 4 typically involves minor changes to test code.  Som
 We recommend performing string replacement on tests written for Pester 3 and earlier as follows:
 
 1. replace all occurrences of any `Contain` assertion with `FileContentMatch`.
-1. rename all occurrences of `Assert-VerifiableMocks` to `Assert-VerifiableMock`
+2. rename all occurrences of `Assert-VerifiableMocks` to `Assert-VerifiableMock`
 
 You can use this simple script that can migrate test files in UTF8 and ASCII encoding.
 
@@ -222,10 +222,9 @@ function Get-FileEncoding {
 ## Mock-Related Changes
 
 We are not 100% sure what implications changing from functions to aliases had on mocking. There are no immediate changes that you need to do, but here are two articles that should help you start figuring out issues if you have any:
+
 - [Get-Command of mocked function is less complete](https://github.com/pester/Pester/issues/810)
 - [Summary of mock scope changes](https://github.com/pester/Pester/issues/812)
-
-
 
 ## Array-Related Changes
 
