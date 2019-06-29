@@ -49,7 +49,7 @@ The object produced by `Invoke-Pester` when the PassThru switch is used contains
 - `FailedCount`:  Number of failed tests.
 - `Time`:  Total time of test execution.
 - `TestResult`:  An array of individual test results, which are themselves objects containing the name of the `Describe`, `Context` and `It`, a Passed flag indicating whether the test passed or failed, a Time value for this test, a FailureMessage (if the test failed), and a stack trace.
-- CodeCoverage:  If the `CodeCoverage` parameter was also passed to `Invoke-Pester`, the output object will contain a CodeCoverage property as well.
+- `CodeCoverage`:  If the `CodeCoverage` parameter was also passed to `Invoke-Pester`, the output object will contain a CodeCoverage property as well.
 
 #### `CodeCoverage`
 
