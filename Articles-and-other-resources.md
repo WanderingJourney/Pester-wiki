@@ -79,6 +79,7 @@
 | [A Boilerplate for Unit testing DSC resources with Pester](https://mathieubuisson.github.io/unit-testing-dsc-resources/)  | Mathieu Buisson | 2016-07-12|
 
 ## Videos
+
 (Sort order - date of publication)
 
 | Title | Author | Date |
@@ -130,6 +131,7 @@
 |[VSCode snippets for Pester](https://powershell.org/forums/topic/vscode-snippets-for-pester/)|Adam Bertram|2017-03-07|
 
 # Paid resources
+
 ## Books
 
 | Title | Author | Date |
@@ -139,5 +141,6 @@
 ## TBD
 
 Waiting to be re-read and added
-- http://mikefrobbins.com/?s=pester
-- https://powershell.org
+
+- [mikefrobbins.com](http://mikefrobbins.com/?s=pester)
+- [powershell.org](https://powershell.org)

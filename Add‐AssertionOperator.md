@@ -1,8 +1,6 @@
-# Description
-
 This function allows you to create custom Should assertions.
 
-# Example 1
+## Example
 
 ```powershell
 function BeAwesome($ActualValue, [switch] $Negate)

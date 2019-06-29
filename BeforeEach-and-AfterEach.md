@@ -1,5 +1,4 @@
-BeforeEach and AfterEach
----
+## Description
 
 The `BeforeEach` and `AfterEach` commands allow you to define setup and teardown tasks that are performed at the beginning and end of every `It` block.  This can eliminate duplication of code in test scripts, ensure that each test is performed on a pristine state regardless of their order, and perform any necessary cleanup tasks after each test.
 
@@ -7,16 +6,13 @@ The `BeforeEach` and `AfterEach` commands allow you to define setup and teardown
 
 The script blocks assigned to `BeforeEach` and `AfterEach` are dot-sourced in the `Context` or `Describe` which contains the current `It` statement, so you don't have to worry about the scope of variable assignments.  Any variables that are assigned values within a `BeforeEach` block can be used inside the body of the `It` block.
 
----
 ### Note about syntax and placement
 
 Unlike most of the commands in a Pester script, `BeforeEach` and `AfterEach` blocks apply to the entire `Describe` or `Context` scope in which they are defined, regardless of the order of commands inside the `Describe` or `Context`.  In other words, even if an `It` block appears before `BeforeEach` or `AfterEach` in the tests file, the `BeforeEach` and `AfterEach` will still be executed.
 
----
+## Example
 
-### Example
-
-```posh
+```powershell
 Describe 'Testing BeforeEach and AfterEach' {
     $afterEachVariable = 'AfterEach has not been executed yet'
 

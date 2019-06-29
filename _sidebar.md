@@ -1,5 +1,4 @@
-Concepts
-----------
+## Concepts
 
 * [[What is Pester?|Pester]]
 * [[Isolating File Operations using the TestDrive|TestDrive]]
@@ -9,8 +8,7 @@ Concepts
 * [[Showing Test Results in CI (TeamCity, AppVeyor, Azure DevOps)]]
 * [[Generating Code Coverage metrics|Code Coverage]]
 
-Command Reference
-------------------
+## Command Reference
 
 * [[Describe]]
 * [[Context]]

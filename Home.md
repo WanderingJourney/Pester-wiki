@@ -1,5 +1,4 @@
-Concepts
---------
+## Concepts
 
 * [[What is Pester?|Pester]]
 * [[Isolating File Operations using the TestDrive|TestDrive]]
@@ -13,14 +12,12 @@ Concepts
 * [[Pester on PowerShell Core - limitations|Pester on PSCore limitations]]
 * [[Articles and other resources]]
 
-Installation and usage
-----------------------
+## Installation and usage
 
 * [[Installation and update]]
 * [[Migrating from Pester 3 to Pester 4]]
 
-Feedback and contributing to Pester
------------------------------------
+## Feedback and contributing to Pester
 
 * [[Opening issues]]
 * [[Bug related issues]]
@@ -28,8 +25,7 @@ Feedback and contributing to Pester
 * [[Contributing to Pester]]
 * [[Developement rules - technical]]
 
-Command Reference
------------------
+## Command Reference
 
 Command reference section is not updated automatically yet - please check the help for functions too `Get-Help CommandName -Full`.
 

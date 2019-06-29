@@ -1,106 +1,97 @@
-Checks if a Mocked command has been called a certain number of times 
-and throws an exception if it has not.
+Checks if a Mocked command has been called a certain number of times and throws an exception if it has not.  If the call history of the mocked command does not match the parameters passed to `Assert-MockCalled`, `Assert-MockCalled` will throw an exception.
 
-## DESCRIPTION
+## Parameters
 
-This command verifies that a mocked command has been called a certain number
-of times.  If the call history of the mocked command does not match the parameters
-passed to `Assert-MockCalled`, `Assert-MockCalled` will throw an exception.
+#### `CommandName`
 
-## PARAMETERS
-
-### CommandName
 The mocked command whose call history should be checked.
 
-### ModuleName
-The module where the mock being checked was injected.  This is optional,
-and must match the ModuleName that was used when setting up the Mock.
+#### `ModuleName`
 
-### Times
-The number of times that the mock must be called to avoid an exception 
-from throwing.
+The module where the mock being checked was injected.  This is optional, and must match the ModuleName that was used when setting up the Mock.
 
-### Exactly
-If this switch is present, the number specified in Times must match 
-exactly the number of times the mock has been called. Otherwise it 
-must match "at least" the number of times specified.  If the value
-passed to the Times parameter is zero, the Exactly switch is implied.
+#### `Times`
 
-### ParameterFilter
-An optional filter to qualify which calls should be counted. Only those 
-calls to the mock whose parameters cause this filter to return true 
-will be counted.
+The number of times that the mock must be called to avoid an exception from throwing.
 
-### Scope
-An optional parameter specifying the Pester scope in which to check for
-calls to the mocked command.  By default, `Assert-MockCalled` will find
-all calls to the mocked command in the current `Context` block (if present),
-or the current `Describe` block (if there is no active `Context`.)  Valid
-values are `Describe`, `Context` and `It`. If you use a scope of `Describe` or
-`Context`, the command will identify all calls to the mocked command in the
-current `Describe` / `Context` block, as well as all child scopes of that block.
+#### `Exactly`
 
-EXAMPLE 1
------------
-````
+If this switch is present, the number specified in Times must match exactly the number of times the mock has been called. Otherwise it must match "at least" the number of times specified.  If the value passed to the Times parameter is zero, the Exactly switch is implied.
+
+#### `ParameterFilter`
+
+An optional filter to qualify which calls should be counted. Only those calls to the mock whose parameterscause this filter to return true will be counted.
+
+#### `Scope`
+
+An optional parameter specifying the Pester scope in which to check for calls to the mocked command.  By default, `Assert-MockCalled` will find all calls to the mocked command in the current `Context` block (if present), or the current `Describe` block (if there is no active `Context`.)  Valid values are `Describe`, `Context` and `It`. If you use a scope of `Describe` or `Context`, the command will identify all calls to the mocked command in the current `Describe` / `Context` block, as well as all child scopes of that block.
+
+## Example 1
+
+```powershell
 C:\PS>Mock Set-Content {}
 
 {... Some Code ...}
 
 C:\PS>Assert-MockCalled Set-Content
-````
-This will throw an exception and cause the test to fail if Set-Content is not called in Some Code.
+```
 
-EXAMPLE 2
-----------
-````
+This will throw an exception and cause the test to fail if `Set-Content` is not called in Some Code.
+
+## Example 2
+
+```powershell
 C:\PS>Mock Set-Content -ParameterFilter {$path.StartsWith("$env:temp\")}
 
 {... Some Code ...}
 
 C:\PS>Assert-MockCalled Set-Content 2 -ParameterFilter { $path -eq "$env:temp\test.txt" }
-````
-This will throw an exception if some code calls `Set-Content` on `$path=$env:temp\test.txt` less than 2 times 
+```
 
-EXAMPLE 3
------------
-````
+This will throw an exception if some code calls `Set-Content` on `$path=$env:temp\test.txt` less than 2 times
+
+## Example 3
+
+```powershell
 C:\PS>Mock Set-Content {}
 
 {... Some Code ...}
 
 C:\PS>Assert-MockCalled Set-Content 0
-````
+```
+
 This will throw an exception if some code calls Set-Content at all
 
-EXAMPLE 4
------------
-````
+## Example 4
+
+```powershell
 C:\PS>Mock Set-Content {}
 
 {... Some Code ...}
 
 C:\PS>Assert-MockCalled Set-Content -Exactly 2
-````
+```
+
 This will throw an exception if some code does not call Set-Content Exactly two times.
 
-EXAMPLE 5
-------------
-```posh
+## Example 5
+
+```powershell
 Describe 'Assert-MockCalled Scope behavior' {
     Mock Set-Content { }
 
     It 'Calls Set-Content at least once in the It block' {
-        {... Some Code ...}        
+        {... Some Code ...}
         Assert-MockCalled Set-Content -Exactly 0 -Scope It
     }
 }
 ```
+
 Checks for calls only within the current It block.
 
-EXAMPLE 6
-------------
-```posh
+## Example 6
+
+```powershell
 Describe 'Describe' {
     Mock -ModuleName SomeModule Set-Content { }
 
@@ -112,11 +103,10 @@ Describe 'Describe' {
 }
 ```
 
-Checks for calls to the mock within the SomeModule module.  Note that both the `Mock`
-and `Assert-MockCalled` commands use the same module name.
+Checks for calls to the mock within the SomeModule module.  Note that both the `Mock`and `Assert-MockCalled` commands use the same module name.
 
-NOTES
--------
+## Additional Notes
+
 The parameter filter passed to `Assert-MockCalled` does not necessarily have to match the parameter filter
 (if any) which was used to create the Mock.  `Assert-MockCalled` will find any entry in the command history
 which matches its parameter filter, regardless of how the Mock was created.  However, if any calls to the

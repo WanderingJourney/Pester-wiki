@@ -13,11 +13,12 @@
 
 ## PowerShell Core compatibility rules
 
-Due that Pester is now supported (since v. 4.1.0) also on PowerShell Core 6.x is now available for operating system different than Windows, please
+Due that Pester is now supported (since v. 4.1.0) also on PowerShell Core 6.x is now available for operating system different than Windows, please:
+
 - use ```[System.Environment]::NewLine``` instead of `` `n``, `\n`, `` `r``, `\r` or combination of them
 - remember that the EOL (end of a line) chars in files added to the Pester repository will be converted to Windows style automatically by git - it's configured by attributes set in [.gitattributes](https://git-scm.com/docs/gitattributes) so you can see something like
 
-```
+```cmd
 PS <FOLDER_PATH>/Pester> git add .
 warning: LF will be replaced by CRLF in Examples/Calculator/Add-Numbers.Tests.ps1.
 The file will have its original line endings in your working directory.
